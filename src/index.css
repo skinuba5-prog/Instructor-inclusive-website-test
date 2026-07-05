@@ -1,0 +1,538 @@
+@import 'tailwindcss';
+
+/* ---------------------------------------------------------------
+   Design tokens — sourced from DESIGN.md ("Stripi" design system).
+   Every future page should build on these tokens, not new ones.
+------------------------------------------------------------------ */
+:root {
+  /* Brand & accent */
+  --primary: #533afd;
+  --primary-deep: #4434d4;
+  --primary-press: #2e2b8c;
+  --primary-soft: #665efd;
+  --primary-bg-subdued-hover: #b9b9f9;
+  --brand-dark-900: #1c1e54;
+  --ruby: #ea2261;
+  --magenta: #f96bee;
+  --lemon: #9b6829;
+  --shadow-blue: #003770;
+
+  /* Surface */
+  --canvas: #ffffff;
+  --canvas-soft: #f6f9fc;
+  --canvas-cream: #f5e9d4;
+  --hairline: #e3e8ee;
+  --hairline-input: #a8c3de;
+
+  /* Text */
+  --ink: #0d253d;
+  --ink-secondary: #273951;
+  --ink-mute: #64748d;
+  --ink-mute-2: #61718a;
+  --on-primary: #ffffff;
+
+  /* Radius */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-pill: 9999px;
+
+  /* Spacing */
+  --space-xxs: 2px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-lg: 16px;
+  --space-xl: 24px;
+  --space-xxl: 32px;
+  --space-huge: 64px;
+
+  /* Elevation */
+  --shadow-1: rgba(0, 55, 112, 0.08) 0 1px 3px;
+  --shadow-2:
+    rgba(0, 55, 112, 0.08) 0 8px 24px, rgba(0, 55, 112, 0.04) 0 2px 6px;
+
+  /* Sohne is proprietary — Inter is the documented open-source substitute */
+  --font-brand: 'Inter', 'SF Pro Display', system-ui, -apple-system, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: var(--font-brand);
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.4;
+  font-feature-settings: 'ss01';
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100svh;
+}
+
+/* ---------------------------------------------------------------
+   Typography scale — DESIGN.md `typography.*` tokens
+------------------------------------------------------------------ */
+.display-xxl,
+.display-xl,
+.display-lg,
+.display-md,
+.heading-lg,
+.heading-md,
+.heading-sm,
+.body-lg,
+.body-md,
+.body-tabular,
+.button-md,
+.button-sm,
+.caption,
+.micro,
+.micro-cap {
+  font-family: var(--font-brand);
+  font-feature-settings: 'ss01';
+}
+
+.display-xxl {
+  font-size: 56px;
+  font-weight: 300;
+  line-height: 1.03;
+  letter-spacing: -1.4px;
+}
+.display-xl {
+  font-size: 48px;
+  font-weight: 300;
+  line-height: 1.15;
+  letter-spacing: -0.96px;
+}
+.display-lg {
+  font-size: 32px;
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.64px;
+}
+.display-md {
+  font-size: 26px;
+  font-weight: 300;
+  line-height: 1.12;
+  letter-spacing: -0.26px;
+}
+.heading-lg {
+  font-size: 22px;
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.22px;
+}
+.heading-md {
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1.4;
+  letter-spacing: -0.2px;
+}
+.heading-sm {
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.4;
+}
+.body-lg {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.4;
+}
+.body-md {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.4;
+}
+.body-tabular {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.4;
+  letter-spacing: -0.42px;
+  font-feature-settings: 'tnum';
+}
+.button-md {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1;
+}
+.button-sm {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+}
+.caption {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.39px;
+  font-feature-settings: 'tnum';
+}
+.micro {
+  font-size: 11px;
+  font-weight: 300;
+  line-height: 1.4;
+}
+.micro-cap {
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: 0.1px;
+  text-transform: uppercase;
+}
+
+/* Hero headline — display-xxl, stair-stepped per Responsive Behavior
+   (Mobile drops to 36px; tablet/desktop match display-xl / display-xxl) */
+.hero-headline {
+  font-family: var(--font-brand);
+  font-feature-settings: 'ss01';
+  font-weight: 300;
+  font-size: 36px;
+  line-height: 1.12;
+  letter-spacing: -0.7px;
+}
+@media (min-width: 768px) {
+  .hero-headline {
+    font-size: 48px;
+    line-height: 1.15;
+    letter-spacing: -0.96px;
+  }
+}
+@media (min-width: 1024px) {
+  .hero-headline {
+    font-size: 56px;
+    line-height: 1.03;
+    letter-spacing: -1.4px;
+  }
+}
+
+/* Secondary page title (Programs / Contact headers) — same
+   stair-stepping as .hero-headline, landing on display-xl at desktop. */
+.page-title {
+  font-family: var(--font-brand);
+  font-feature-settings: 'ss01';
+  font-weight: 300;
+  font-size: 28px;
+  line-height: 1.18;
+  letter-spacing: -0.5px;
+}
+@media (min-width: 768px) {
+  .page-title {
+    font-size: 40px;
+    line-height: 1.15;
+    letter-spacing: -0.8px;
+  }
+}
+@media (min-width: 1024px) {
+  .page-title {
+    font-size: 48px;
+    line-height: 1.15;
+    letter-spacing: -0.96px;
+  }
+}
+
+/* Large tabular stat figure — for count-up numbers on the trust strip.
+   Tabular figures per DESIGN.md's rule for any numeric cell. */
+.stat-number {
+  font-family: var(--font-brand);
+  font-feature-settings: 'tnum';
+  font-weight: 300;
+  font-size: 40px;
+  line-height: 1.1;
+  letter-spacing: -0.8px;
+}
+@media (min-width: 768px) {
+  .stat-number {
+    font-size: 48px;
+    letter-spacing: -0.96px;
+  }
+}
+
+/* ---------------------------------------------------------------
+   Buttons — {rounded.pill}, tight 8px 16px padding
+------------------------------------------------------------------ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  min-height: 40px;
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-brand);
+  font-feature-settings: 'ss01';
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1;
+  white-space: nowrap;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.2s ease;
+}
+@media (max-width: 767px) {
+  .btn {
+    min-height: 44px;
+    padding: 10px 20px;
+  }
+}
+.btn:hover {
+  transform: translateY(-1px);
+}
+.btn:active {
+  transform: translateY(0);
+}
+.btn-primary {
+  background: var(--primary);
+  color: var(--on-primary);
+}
+.btn-primary:hover {
+  background: var(--primary-deep);
+  box-shadow: 0 8px 20px rgba(83, 58, 253, 0.28);
+}
+.btn-primary:active {
+  background: var(--primary-press);
+  box-shadow: none;
+}
+.btn-secondary {
+  background: var(--canvas);
+  color: var(--primary);
+  border-color: var(--primary);
+}
+.btn-secondary:hover {
+  background: var(--primary-bg-subdued-hover);
+}
+.btn-on-dark {
+  background: var(--brand-dark-900);
+  color: var(--on-primary);
+}
+.btn-on-dark:hover {
+  background: var(--ink);
+}
+
+/* ---------------------------------------------------------------
+   Forms — {text-input} / {text-input-focused}
+------------------------------------------------------------------ */
+.text-input {
+  display: block;
+  width: 100%;
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: var(--font-brand);
+  font-feature-settings: 'ss01';
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.4;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--hairline-input);
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+.text-input:focus {
+  border-color: var(--primary);
+}
+.text-input::placeholder {
+  color: var(--ink-mute);
+}
+/* DESIGN.md keeps semantic color out of the marketing palette, so the
+   error state borrows {colors.ruby} — already brand-documented, just
+   repurposed here rather than inventing a new accent. */
+.text-input-error {
+  border-color: var(--ruby);
+}
+.text-input-error:focus {
+  border-color: var(--ruby);
+}
+
+/* ---------------------------------------------------------------
+   Cards & pills
+------------------------------------------------------------------ */
+.card-feature-light {
+  background: var(--canvas);
+  color: var(--ink);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--hairline);
+  padding: var(--space-xxl);
+  box-shadow: var(--shadow-2);
+  transition:
+    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.25s ease;
+}
+.card-feature-light:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    rgba(0, 55, 112, 0.16) 0 20px 40px,
+    rgba(0, 55, 112, 0.06) 0 6px 14px;
+}
+
+/* Compact client / logo-wall card — Level 1 shadow, quieter than
+   card-feature-light since it supports many items in a grid. */
+.client-card {
+  background: var(--canvas);
+  color: var(--ink);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--hairline);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-1);
+  transition:
+    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.25s ease;
+}
+.client-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-2);
+}
+
+.logo-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: var(--primary-bg-subdued-hover);
+  color: var(--primary-deep);
+  font-family: var(--font-brand);
+  font-feature-settings: 'ss01';
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: -0.1px;
+}
+
+.pill-tag-soft {
+  display: inline-flex;
+  align-items: center;
+  background: var(--primary-bg-subdued-hover);
+  color: var(--primary-deep);
+  border-radius: var(--radius-pill);
+  padding: var(--space-xs) var(--space-sm);
+}
+
+/* ---------------------------------------------------------------
+   Gradient mesh — the brand's signature hero backdrop.
+   Layered radial-gradients approximate the organic blob mesh.
+------------------------------------------------------------------ */
+.gradient-mesh {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.gradient-mesh::before {
+  content: '';
+  position: absolute;
+  inset: -25%;
+  background:
+    radial-gradient(38% 45% at 6% 10%, var(--canvas-cream) 0%, transparent 70%),
+    radial-gradient(34% 42% at 26% 2%, var(--lemon) 0%, transparent 68%),
+    radial-gradient(
+      46% 55% at 52% 0%,
+      var(--primary-soft) 0%,
+      transparent 65%
+    ),
+    radial-gradient(40% 50% at 76% 18%, var(--primary) 0%, transparent 62%),
+    radial-gradient(30% 42% at 97% 6%, var(--ruby) 0%, transparent 65%),
+    radial-gradient(28% 36% at 100% 38%, var(--magenta) 0%, transparent 70%);
+  filter: blur(70px) saturate(1.1);
+  opacity: 0.9;
+}
+
+/* ---------------------------------------------------------------
+   Nav — floats translucent over the mesh
+------------------------------------------------------------------ */
+.nav-bar-on-mesh {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(14px) saturate(1.4);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+}
+
+/* ---------------------------------------------------------------
+   Credential ticker — thin scrolling strip at the very top of the
+   page. Dark-navy band, echoing the trust-stats section, rather
+   than spending {colors.primary} (reserved for CTAs) on a background.
+------------------------------------------------------------------ */
+.ticker {
+  background: var(--brand-dark-900);
+  overflow: hidden;
+}
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker-scroll 42s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track {
+    animation: none;
+  }
+}
+.ticker-item {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  padding: 9px 0;
+  font-family: var(--font-brand);
+  font-feature-settings: 'ss01';
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.82);
+}
+.ticker-dot {
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  margin: 0 18px;
+  border-radius: var(--radius-pill);
+  background: var(--primary-soft);
+  flex-shrink: 0;
+}
+@keyframes ticker-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    animation: reveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+}
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+}
