@@ -1,3 +1,13 @@
+// Rotating accent hues pulled straight from the gradient-mesh stops —
+// used to give repeated card/stat grids a bit of color rhythm without
+// introducing colors outside the documented palette.
+export const accentHues = [
+  'var(--primary-soft)',
+  'var(--ruby)',
+  'var(--lemon)',
+  'var(--magenta)',
+]
+
 export const positioning = {
   headline: '기업의 일하는 방식을 바꾸는 AI 교육.',
   sub: [

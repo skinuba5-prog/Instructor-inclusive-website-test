@@ -3,6 +3,10 @@ import type { ChangeEvent, FormEvent, ReactNode } from 'react'
 import MeshHeader from '../components/MeshHeader'
 import { contact } from '../data/instructor'
 
+// Google Sheets에 문의 내용을 한 줄씩 쌓아주는 Apps Script 웹 앱 주소.
+const SHEET_ENDPOINT =
+  'https://script.google.com/macros/s/AKfycbzwvVIyF_ZkjbGzys5IzpKa1a9U1Yo3CCN4Ue8FVK0pk96u0FZ1I0hJ3J-AUCwY_s5XyA/exec'
+
 const initialForm = {
   organization: '',
   contactName: '',
@@ -98,6 +102,14 @@ export default function Contact() {
       form.needs,
     ].join('\n')
 
+    // Google 시트 기록은 실패해도 문의 접수 흐름(메일 전송)을 막지 않도록
+    // 조용히 시도만 한다.
+    fetch(SHEET_ENDPOINT, {
+      method: 'POST',
+      mode: 'no-cors',
+      body: new URLSearchParams(form),
+    }).catch(() => {})
+
     window.location.href = `mailto:${contact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
     setSubmitted(true)
   }
@@ -105,12 +117,12 @@ export default function Contact() {
   return (
     <div>
       <MeshHeader>
-        <div className="reveal mx-auto max-w-[1200px] px-6 py-16 md:px-10 lg:py-20">
+        <div className="reveal mx-auto max-w-[1200px] px-6 py-16 md:px-10 lg:py-24">
           <span className="pill-tag-soft micro-cap">강의 문의</span>
-          <h1 className="page-title mt-5 max-w-[20ch] text-[var(--ink)]">
+          <h1 className="page-title mt-6 max-w-[20ch] text-[var(--ink)]">
             섭외 문의는 아래 내용으로 받고 있습니다
           </h1>
-          <p className="body-lg mt-4 max-w-[54ch] text-[var(--ink-secondary)]">
+          <p className="body-lg mt-5 max-w-[54ch] text-[var(--ink-secondary)]">
             조직 규모, 대상 직무, 원하는 시간대를 알려주시면 빠르게
             답변드립니다.
           </p>
@@ -153,7 +165,7 @@ export default function Contact() {
             noValidate
             className="card-feature-light mx-auto max-w-[720px]"
           >
-            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
               <Field
                 label={fieldLabels.organization}
                 required
@@ -232,11 +244,11 @@ export default function Contact() {
               </Field>
             </div>
 
-            <button type="submit" className="btn btn-primary mt-7 w-full">
+            <button type="submit" className="btn btn-primary mt-8 w-full">
               문의 보내기
             </button>
 
-            <p className="caption mt-3 text-[var(--ink-mute)]">
+            <p className="caption mt-3.5 text-[var(--ink-mute)]">
               보내기를 누르면 작성하신 내용이 담긴 이메일 앱이 열립니다.
               이메일 앱이 열리지 않으면 {contact.email} 로 직접 보내주세요.
             </p>

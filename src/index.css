@@ -304,10 +304,15 @@ body {
 .btn-primary {
   background: var(--primary);
   color: var(--on-primary);
+  box-shadow:
+    rgba(83, 58, 253, 0.16) 0 1px 2px,
+    rgba(83, 58, 253, 0.2) 0 6px 16px;
 }
 .btn-primary:hover {
   background: var(--primary-deep);
-  box-shadow: 0 8px 20px rgba(83, 58, 253, 0.28);
+  box-shadow:
+    rgba(83, 58, 253, 0.18) 0 2px 4px,
+    rgba(83, 58, 253, 0.34) 0 12px 28px;
 }
 .btn-primary:active {
   background: var(--primary-press);
@@ -320,6 +325,7 @@ body {
 }
 .btn-secondary:hover {
   background: var(--primary-bg-subdued-hover);
+  box-shadow: var(--shadow-1);
 }
 .btn-on-dark {
   background: var(--brand-dark-900);
@@ -327,6 +333,7 @@ body {
 }
 .btn-on-dark:hover {
   background: var(--ink);
+  box-shadow: var(--shadow-2);
 }
 
 /* ---------------------------------------------------------------
@@ -373,16 +380,39 @@ body {
   border-radius: var(--radius-lg);
   border: 1px solid var(--hairline);
   padding: var(--space-xxl);
-  box-shadow: var(--shadow-2);
+  box-shadow: var(--shadow-1);
   transition:
-    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 0.25s ease;
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
 }
 .card-feature-light:hover {
-  transform: translateY(-4px);
-  box-shadow:
-    rgba(0, 55, 112, 0.16) 0 20px 40px,
-    rgba(0, 55, 112, 0.06) 0 6px 14px;
+  transform: translateY(-6px);
+  border-color: var(--hairline-input);
+  box-shadow: var(--shadow-2);
+}
+
+/* Elevated variant — panels that float directly on the gradient mesh
+   (the hero profile card) get a deeper radius plus a thin gradient
+   cap that echoes the mesh colors behind them. */
+.card-feature-floating {
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+}
+.card-feature-floating::before {
+  content: '';
+  display: block;
+  height: 3px;
+  margin: calc(var(--space-xxl) * -1) calc(var(--space-xxl) * -1)
+    var(--space-xl);
+  background: linear-gradient(
+    90deg,
+    var(--lemon) 0%,
+    var(--primary-soft) 35%,
+    var(--primary) 60%,
+    var(--ruby) 85%,
+    var(--magenta) 100%
+  );
 }
 
 /* Compact client / logo-wall card — Level 1 shadow, quieter than
@@ -395,12 +425,21 @@ body {
   padding: var(--space-xl);
   box-shadow: var(--shadow-1);
   transition:
-    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 0.25s ease;
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
 }
 .client-card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px);
+  border-color: var(--hairline-input);
   box-shadow: var(--shadow-2);
+}
+
+.stat-accent {
+  display: inline-block;
+  width: 28px;
+  height: 3px;
+  border-radius: var(--radius-pill);
 }
 
 .logo-badge {
@@ -426,6 +465,34 @@ body {
   color: var(--primary-deep);
   border-radius: var(--radius-pill);
   padding: var(--space-xs) var(--space-sm);
+}
+
+/* Quiet secondary action — a plain link, not a second pill, so it
+   never competes with the one filled CTA in its band. */
+.link-on-light {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  color: var(--ink-secondary);
+  font-family: var(--font-brand);
+  font-feature-settings: 'ss01';
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1;
+  padding: var(--space-sm) 0;
+  transition:
+    color 0.15s ease,
+    gap 0.2s ease;
+}
+.link-on-light svg {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.link-on-light:hover {
+  color: var(--primary);
+  gap: var(--space-md);
+}
+.link-on-light:hover svg {
+  transform: translateX(2px);
 }
 
 /* ---------------------------------------------------------------
@@ -454,8 +521,21 @@ body {
     radial-gradient(40% 50% at 76% 18%, var(--primary) 0%, transparent 62%),
     radial-gradient(30% 42% at 97% 6%, var(--ruby) 0%, transparent 65%),
     radial-gradient(28% 36% at 100% 38%, var(--magenta) 0%, transparent 70%);
-  filter: blur(70px) saturate(1.1);
-  opacity: 0.9;
+  filter: blur(90px) saturate(1.05);
+  opacity: 0.8;
+}
+/* Dissolve the mesh into the plain canvas before it meets the next
+   section, so the wash reads as an ambient backdrop rather than a
+   panel with a hard-cut edge. */
+.gradient-mesh::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 40%,
+    var(--canvas) 94%
+  );
 }
 
 /* ---------------------------------------------------------------
@@ -465,6 +545,7 @@ body {
   background: rgba(255, 255, 255, 0.72);
   backdrop-filter: blur(14px) saturate(1.4);
   -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  border-bottom: 1px solid rgba(227, 232, 238, 0.7);
 }
 
 /* ---------------------------------------------------------------

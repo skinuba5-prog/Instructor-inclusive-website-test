@@ -3,14 +3,14 @@ import { badge, profile, stats } from '../data/instructor'
 
 export default function ProfileCard() {
   return (
-    <div className="reveal flex items-center justify-center px-6 py-16 md:px-10 lg:py-24">
-      <div className="card-feature-light w-full max-w-[420px]">
+    <div className="reveal flex items-center justify-center px-6 py-16 md:px-10 lg:py-28">
+      <div className="card-feature-light card-feature-floating w-full max-w-[420px]">
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-center gap-4">
             <img
               src={instructorPhoto}
               alt="박지훈 강사 프로필 사진"
-              className="h-16 w-16 rounded-full object-cover"
+              className="h-16 w-16 rounded-full object-cover ring-2 ring-[var(--canvas)] ring-offset-2 ring-offset-[var(--primary-bg-subdued-hover)]"
             />
             <div>
               <p className="micro-cap text-[var(--ink-mute)]">Name</p>
@@ -20,12 +20,12 @@ export default function ProfileCard() {
           <span className="pill-tag-soft micro-cap shrink-0">{badge}</span>
         </div>
 
-        <div className="mt-5 border-t border-[var(--hairline)] pt-5">
+        <div className="mt-6 border-t border-[var(--hairline)] pt-6">
           <p className="micro-cap text-[var(--ink-mute)]">Role</p>
-          <p className="body-md mt-1 text-[var(--ink)]">{profile.role}</p>
+          <p className="body-md mt-1.5 text-[var(--ink)]">{profile.role}</p>
         </div>
 
-        <ul className="mt-5 space-y-2.5 border-t border-[var(--hairline)] pt-5">
+        <ul className="mt-6 space-y-3 border-t border-[var(--hairline)] pt-6">
           {profile.points.map((point) => (
             <li key={point} className="flex gap-2.5">
               <span
@@ -39,7 +39,7 @@ export default function ProfileCard() {
           ))}
         </ul>
 
-        <div className="mt-6 grid grid-cols-2 gap-x-4 gap-y-5 border-t border-[var(--hairline)] pt-5 sm:grid-cols-4">
+        <div className="mt-7 grid grid-cols-2 gap-x-4 gap-y-6 border-t border-[var(--hairline)] pt-6 sm:grid-cols-4">
           {stats.map((stat) => (
             <div key={stat.label}>
               <p className="body-tabular font-medium text-[var(--ink)]">

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { accentHues } from '../data/instructor'
 
 export default function ProgramCard({
   index,
@@ -16,6 +17,7 @@ export default function ProgramCard({
   }
 }) {
   const [open, setOpen] = useState(false)
+  const accent = accentHues[index % accentHues.length]
 
   return (
     <div className="card-feature-light flex h-full flex-col">
@@ -27,13 +29,16 @@ export default function ProgramCard({
         className="group flex w-full items-start justify-between gap-4 text-left"
       >
         <div>
-          <span className="micro-cap text-[var(--ink-mute)]">
-            {String(index + 1).padStart(2, '0')} · {program.subtitle}
+          <span className="micro-cap">
+            <span style={{ color: accent }}>
+              {String(index + 1).padStart(2, '0')}
+            </span>
+            <span className="text-[var(--ink-mute)]"> · {program.subtitle}</span>
           </span>
-          <h2 className="heading-md mt-3 text-[var(--ink)]">
+          <h2 className="heading-md mt-4 text-[var(--ink)]">
             {program.title}
           </h2>
-          <p className="body-md mt-3 text-[var(--ink-secondary)]">
+          <p className="body-md mt-4 text-[var(--ink-secondary)]">
             {program.intro}
           </p>
         </div>
@@ -61,13 +66,14 @@ export default function ProgramCard({
         }`}
       >
         <div className="overflow-hidden">
-          <div className="mt-5 border-t border-[var(--hairline)] pt-5">
+          <div className="mt-6 border-t border-[var(--hairline)] pt-6">
             <p className="micro-cap text-[var(--ink-mute)]">세부 항목</p>
-            <ul className="mt-2 space-y-1.5">
+            <ul className="mt-3 space-y-2">
               {program.details.map((detail) => (
                 <li key={detail} className="flex gap-2.5">
                   <span
-                    className="mt-2 block h-1 w-1 shrink-0 rounded-full bg-[var(--primary)]"
+                    className="mt-2 block h-1 w-1 shrink-0 rounded-full"
+                    style={{ backgroundColor: accent }}
                     aria-hidden="true"
                   />
                   <span className="body-md text-[var(--ink-secondary)]">
@@ -77,14 +83,14 @@ export default function ProgramCard({
               ))}
             </ul>
 
-            <p className="micro-cap mt-5 text-[var(--ink-mute)]">결과물</p>
-            <p className="body-md mt-1 text-[var(--ink-secondary)]">
+            <p className="micro-cap mt-6 text-[var(--ink-mute)]">결과물</p>
+            <p className="body-md mt-1.5 text-[var(--ink-secondary)]">
               {program.outcome}
             </p>
 
-            <div className="mt-5 border-t border-[var(--hairline)] pt-4">
+            <div className="mt-6 border-t border-[var(--hairline)] pt-5">
               <p className="micro-cap text-[var(--ink-mute)]">대상 · 시간</p>
-              <p className="body-tabular mt-1 text-[var(--ink)]">
+              <p className="body-tabular mt-1.5 text-[var(--ink)]">
                 {program.audience} · {program.duration}
               </p>
             </div>
