@@ -11,6 +11,7 @@ const initialForm = {
   organization: '',
   contactName: '',
   phone: '',
+  email: '',
   audience: '',
   schedule: '',
   needs: '',
@@ -22,6 +23,7 @@ const requiredFields: (keyof FormState)[] = [
   'organization',
   'contactName',
   'phone',
+  'email',
   'needs',
 ]
 
@@ -29,6 +31,7 @@ const fieldLabels: Record<keyof FormState, string> = {
   organization: '기관/회사명',
   contactName: '담당자 성함',
   phone: '연락처',
+  email: '이메일',
   audience: '교육 대상·인원',
   schedule: '희망 일정',
   needs: '어떤 교육이 필요한지',
@@ -95,6 +98,7 @@ export default function Contact() {
       `기관/회사명: ${form.organization}`,
       `담당자 성함: ${form.contactName}`,
       `연락처: ${form.phone}`,
+      `이메일: ${form.email}`,
       `교육 대상·인원: ${form.audience}`,
       `희망 일정: ${form.schedule}`,
       '',
@@ -205,6 +209,20 @@ export default function Contact() {
                   placeholder="010-0000-0000"
                   value={form.phone}
                   onChange={update('phone')}
+                />
+              </Field>
+
+              <Field
+                label={fieldLabels.email}
+                required
+                error={errors.email ? '이메일을 입력해주세요.' : undefined}
+              >
+                <input
+                  type="email"
+                  className={`text-input ${errors.email ? 'text-input-error' : ''}`}
+                  placeholder="example@company.com"
+                  value={form.email}
+                  onChange={update('email')}
                 />
               </Field>
 
